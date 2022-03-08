@@ -34,7 +34,7 @@ const App = () => {
         <div className="container">
             <Banner title={ schedule.title } putMainTitleBack={mainTitle => changeMainTitle(mainTitle)}/>
             <ScheduleContext.Provider value={changeMainTitle}>
-                <CourseList courses={ schedule.courses } selectCourse={(courseTitle) => changeMainTitle(courseTitle)} />
+                <CourseList courses={ schedule.courses } clickOnCourse={(courseTitle) => changeMainTitle(courseTitle)} />
             </ScheduleContext.Provider>
         </div>
     );
@@ -115,13 +115,13 @@ const TermButton = ({term, checked}) => {
     )
 }
 
-const Course = ({course, selectCourse}) => {
+const Course = ({course, clickOnCourse}) => {
     const courseTermAndName = `${getCourseTerm(course)} CS ${getCourseNumber(course)}`;
     const changeMainTitle = useContext(ScheduleContext);
     return (
         <div className="card m-1 p-2">
             <div className="card-body">
-                <div className="card-title" onClick={() => selectCourse(courseTermAndName)}>{courseTermAndName}</div>
+                <div className="card-title" onClick={() => clickOnCourse(courseTermAndName)}>{courseTermAndName}</div>
                 <div className="card-text" onClick={() => changeMainTitle(course.title)}>{course.title}</div>
             </div>
         </div>
