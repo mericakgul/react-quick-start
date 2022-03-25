@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "quick-start-firebase-e19fb",
     "public": "build",
     "ignore": [
       "firebase.json",
