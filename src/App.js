@@ -28,10 +28,10 @@ const App = () => {
     // if (!schedule) return <h1>Loading schedule...</h1>;
 
     const changeMainTitle = (courseTitle) => {  // After adding firebase database this function is not working anymore. It'll be kept for study purposes.
-        addScheduleTimes((prevState) => ({
-            ...prevState,
-            title: courseTitle,
-        }));
+        // setSchedule((prevState) => ({
+        //     ...prevState,
+        //     title: courseTitle,
+        // }));
     };
 
     return (                                // Here there are two ways to move the props to the sub components. First one is with provider and in this case we do not need to carry the prop in every single sub component but
