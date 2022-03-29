@@ -8,15 +8,11 @@ export const addScheduleTimes = schedule => {
 };
 
 export const getCourseNumber = course => (
-    course.id.slice(1, 4)
+    course.id.slice(1)
 );
 
 export const getCourseTerm = course => (
     terms[course.id.charAt(0)]
-);
-
-export const toggle = (x, lst) => (
-    lst.includes(x) ? lst.filter(y => y !== x) : [x, ...lst]
 );
 
 export const hasConflict = (course, selected) => (
@@ -27,7 +23,7 @@ const days = ['M', 'Tu', 'W', 'Th', 'F'];
 
 const meetsPat = /^ *((?:M|Tu|W|Th|F)+) +(\d\d?):(\d\d) *[ -] *(\d\d?):(\d\d) *$/;
 
-const timeParts = meets => {
+export const timeParts = meets => {
     const [match, days, hh1, mm1, hh2, mm2] = meetsPat.exec(meets) || [];
     return !match ? {} : {
         days,
@@ -54,7 +50,7 @@ const daysOverlap = (days1, days2) => (
 );
 
 const hoursOverlap = (hours1, hours2) => (
-    Math.max(hours1.start, hours2.start) > Math.min(hours1.end, hours2.end)
+    Math.max(hours1.start, hours2.start) < Math.min(hours1.end, hours2.end)
 );
 
 const timeConflict = (course1, course2) => (
