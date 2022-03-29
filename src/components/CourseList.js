@@ -1,6 +1,7 @@
 import React, {createContext, useContext, useState} from "react";
 import {getCourseTerm, terms} from "../utilities/times";
 import Course from "./Course";
+import {signInWithGoogle, signOut, useUserState} from "../utilities/firebase";
 
 const SettingTerm = createContext(undefined);
 
@@ -12,7 +13,7 @@ const CourseList = ({courses, ...props}) => {
     const [term, setTerm] = useState('Fall');
     const [selected, setSelected] = useState([]);
 
-    if(scheduleChanged(selected, courses)) {
+    if (scheduleChanged(selected, courses)) {
         setSelected([])
     }
 
@@ -30,11 +31,17 @@ const CourseList = ({courses, ...props}) => {
     );
 };
 
-const TermSelector = ({term}) => (
-    <div className='btn-group'>
-        {Object.values(terms).map(value => <TermButton key={value} term={value} checked={value === term}/>)}
-    </div>
-);
+const TermSelector = ({term}) => {
+    const [user] = useUserState();
+    return (
+        <div className="btn-toolbar justify-content-between">
+            <div className='btn-group'>
+                {Object.values(terms).map(value => <TermButton key={value} term={value} checked={value === term}/>)}
+            </div>
+            { user ? <SignOutButton/> : <SignInButton />}
+        </div>
+    );
+};
 
 const TermButton = ({term, checked}) => {
     const setTerm = useContext(SettingTerm);
@@ -46,5 +53,19 @@ const TermButton = ({term, checked}) => {
         </>
     )
 };
+
+const SignInButton = () => (
+    <button className="btn btn-secondary btn-sm m-1"
+            onClick={() => signInWithGoogle()}>
+        Sign In
+    </button>
+);
+
+const SignOutButton = () => (
+    <button className="btn btn-secondary btn-sm m-1"
+            onClick={() => signOut()}>
+        Sign Out
+    </button>
+)
 
 export default CourseList;

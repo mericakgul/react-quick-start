@@ -4,7 +4,7 @@ import {ScheduleContext} from "../App";
 import useDoubleClick from "use-double-click";
 import {useRef} from "react";
 import {timeParts} from "../utilities/times";
-import {setData} from "../utilities/firebase";
+import {setData, useUserState} from "../utilities/firebase";
 
 const reschedule = async (course, meets) => {
     if (meets && window.confirm(`Change ${course.id} to ${meets}?`)) {
@@ -21,6 +21,7 @@ const Course = ({course, selected, setSelected, clickOnCourseCode}) => {
     const changeMainTitle = useContext(ScheduleContext);
     const isSelected = selected.includes(course);
     const isDisabled = !isSelected && hasConflict(course, selected);
+    const [user] = useUserState();
     const style = {backgroundColor: isDisabled ? 'lightgrey' : isSelected ? 'lightgreen' : 'white'};
     const courseRef = useRef();
     useDoubleClick({
@@ -30,7 +31,9 @@ const Course = ({course, selected, setSelected, clickOnCourseCode}) => {
             }
         },
         onDoubleClick: () => {
-            reschedule(course, getCourseMeetingData(course));
+            if(user){
+                reschedule(course, getCourseMeetingData(course));
+            }
         },
         ref: courseRef,
         latency: 250
