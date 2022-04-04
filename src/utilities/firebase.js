@@ -6,7 +6,7 @@ import {getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithPopup, signOut}
 export {firebaseSignOut as signOut};
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDSq5wqKwr4rqRonHmoUOocFTCfXQbQEvQ",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: "quick-start-firebase-e19fb.firebaseapp.com",
     databaseURL: "https://quick-start-firebase-e19fb-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "quick-start-firebase-e19fb",
