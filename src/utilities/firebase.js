@@ -54,7 +54,10 @@ export const signInWithGoogle = () => {
     signInWithPopup(getAuth(app), new GoogleAuthProvider());
 }
 
-const firebaseSignOut = () => signOut(getAuth(app));
+const firebaseSignOut = (name) => {
+    console.log(name, 'signed out');
+    signOut(getAuth(app));
+};
 
 export const useUserState = () => {
     const [user, setUser] = useState();

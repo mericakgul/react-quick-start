@@ -38,7 +38,7 @@ const TermSelector = ({term}) => {
             <div className='btn-group'>
                 {Object.values(terms).map(value => <TermButton key={value} term={value} checked={value === term}/>)}
             </div>
-            { user ? <SignOutButton/> : <SignInButton />}
+            { user ? <SignOutButton displayName = {user.displayName}/> : <SignInButton />}
         </div>
     );
 };
@@ -61,10 +61,10 @@ const SignInButton = () => (
     </button>
 );
 
-const SignOutButton = () => (
+const SignOutButton = ({displayName}) => (
     <button className="btn btn-secondary btn-sm m-1"
-            onClick={() => signOut()}>
-        Sign Out
+            onClick={() => signOut(displayName)}>
+        Sign Out {displayName}
     </button>
 )
 
