@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getDatabase,ref,onValue, set } from "firebase/database";
 import {getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithPopup, signOut} from 'firebase/auth';
 export {firebaseSignOut as signOut};
@@ -18,7 +17,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const database  = getDatabase(app);
 
 export const useData = (path, transform) => {
