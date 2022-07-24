@@ -18,7 +18,7 @@ const reschedule = async (course, meets) => {
 
 const Course = ({course, selected, setSelected, clickOnCourseCode}) => {
     const courseTermAndName = `${getCourseTerm(course)} CS ${getCourseNumber(course)}`;
-    const changeMainTitle = useContext(ScheduleContext);
+    const changeMainTitle = useContext(ScheduleContext); // This is also not being used anymore. For study purposes it is kept
     const isSelected = selected.includes(course);
     const isDisabled = !isSelected && hasConflict(course, selected);
     const [user] = useUserState();
